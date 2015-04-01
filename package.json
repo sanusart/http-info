@@ -1,0 +1,38 @@
+{
+  "name": "http-info",
+  "version": "0.1.0",
+  "description": "Simple informative API for HTTP: methods, headers and response codes",
+  "private": true,
+  "dependencies": {
+    "co-body": "^0.0.2",
+    "co-monk": "0.0.1",
+    "koa": "^0.1.2",
+    "koa-json-body": "^0.0.3",
+    "koa-route": "^1.1.4",
+    "koa-router": "^2.2.0",
+    "kongo": "^0.0.6",
+    "mongoose": "^3.8.25",
+    "monk": "^0.7.1"
+  },
+  "engines": {
+    "node": ">= 0.12.0",
+    "npm": ">= 1.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sanusart/http-info.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "Sasha Khamkov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sanusart/http-info/issues"
+  },
+  "homepage": "https://github.com/sanusart/http-info",
+  "scripts": {
+    "start": "node --harmony app.js"
+  },
+  "main": " --harmony app.js"
+}

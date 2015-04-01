@@ -1,0 +1,44 @@
+#!/bin/bash
+# This is a simple post deploy hook executed after your application
+# is deployed and started.  This script gets executed directly, so
+# it could be python, php, ruby, etc.
+
+#  Update/populate mongoDB
+
+echo "  - Update/populate mongoDB from http://github.com/for-GET/know-your-http-well/json..."
+
+curl https://raw.githubusercontent.com/for-GET/know-your-http-well/master/json/headers.json > ${OPENSHIFT_DATA_DIR}/headers.json;
+curl https://raw.githubusercontent.com/for-GET/know-your-http-well/master/json/methods.json > ${OPENSHIFT_DATA_DIR}/methods.json;
+curl https://raw.githubusercontent.com/for-GET/know-your-http-well/master/json/status-codes.json > ${OPENSHIFT_DATA_DIR}/status-codes.json;
+
+if [ -f "${OPENSHIFT_DATA_DIR}/headers.json" ]; then
+	mongoimport \
+	--db ${OPENSHIFT_GEAR_NAME} \
+	--host ${OPENSHIFT_MONGODB_DB_HOST}:${OPENSHIFT_MONGODB_DB_PORT} \
+	--username ${OPENSHIFT_MONGODB_DB_USERNAME} \
+	--password ${OPENSHIFT_MONGODB_DB_PASSWORD} \
+	--collection headers ${OPENSHIFT_DATA_DIR}/headers.json \
+	--drop \
+	--jsonArray;
+fi
+if [ -f "${OPENSHIFT_DATA_DIR}/methods.json" ]; then
+	mongoimport \
+	--db ${OPENSHIFT_GEAR_NAME} \
+	--host ${OPENSHIFT_MONGODB_DB_HOST}:${OPENSHIFT_MONGODB_DB_PORT} \
+	--username ${OPENSHIFT_MONGODB_DB_USERNAME} \
+	--password ${OPENSHIFT_MONGODB_DB_PASSWORD} \
+	--collection methods ${OPENSHIFT_DATA_DIR}/methods.json \
+	--drop \
+	--jsonArray;
+fi
+if [ -f "${OPENSHIFT_DATA_DIR}/status-codes.json" ]; then
+	mongoimport \
+	--db ${OPENSHIFT_GEAR_NAME} \
+	--host ${OPENSHIFT_MONGODB_DB_HOST}:${OPENSHIFT_MONGODB_DB_PORT} \
+	--username ${OPENSHIFT_MONGODB_DB_USERNAME} \
+	--password ${OPENSHIFT_MONGODB_DB_PASSWORD} \
+	--collection status-codes ${OPENSHIFT_DATA_DIR}/status-codes.json \
+	--drop \
+	--jsonArray;
+fi
+
