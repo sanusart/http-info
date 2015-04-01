@@ -23,7 +23,17 @@ _Returns json objec_
 
 _Returns json objec_
 
---- 
+---
+
+### Local Installation
+
+- Clone the repo
+- Run `npm install`
+- Run the sever with `node --harmony app.js`
+
+For MongoDB population/updates see [post_deploy](https://github.com/sanusart/http-info/blob/master/.openshift/action_hooks/post_deploy) hook
+
+---
 
 Made using [Koa.js](http://koajs.com/) and [MongoDB](http://www.mongodb.org/)
 
