@@ -6,10 +6,12 @@
   "dependencies": {
     "co-body": "^0.0.2",
     "co-monk": "0.0.1",
+    "kcors": "^1.0.1",
     "koa": "^0.1.2",
     "koa-json-body": "^0.0.3",
     "koa-route": "^1.1.4",
     "koa-router": "^2.2.0",
+    "koa-static": "^1.4.9",
     "kongo": "^0.0.6",
     "mongoose": "^3.8.25",
     "monk": "^0.7.1"

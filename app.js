@@ -1,5 +1,7 @@
 #!/bin/env node
 
+'use strict';
+
 var config = {
     nodePort: process.env.OPENSHIFT_NODEJS_PORT || process.env.OPENSHIFT_INTERNAL_PORT || 8080,
     nodeHost: process.env.OPENSHIFT_NODEJS_IP || 'localhost',
@@ -14,9 +16,18 @@ var excludeFields = "-_id";
 var koa = require('koa');
 var route = require('koa-route');
 var app = module.exports = koa();
+var cors = require('kcors');
 var monk = require('monk');
 var wrap = require('co-monk');
-var db = monk( config.mongoUser + ':' + config.mongoPass + '@' + config.mongoHost + ':' + config.mongoPort + '/httpinfo' );
+var db = monk(
+    config.mongoUser + ':' +
+    config.mongoPass + '@' +
+    config.mongoHost + ':' +
+    config.mongoPort +
+    '/httpinfo'
+);
+
+app.use(cors());
 
 // DB collections
 var collection = {
@@ -26,7 +37,6 @@ var collection = {
 };
 
 // Routes
-
 app.use(route.get('/', showInfo));
 app.use(route.get('/method/:method', getMethod));
 app.use(route.get('/status-code/:code', getStatusCode));
@@ -48,6 +58,7 @@ function * showInfo() {
 
 // http://<domain>/method/:methodType
 function * getMethod(method) {
+    // res.header("Access-Control-Allow-Origin", "*");
     this.body = yield collection.methods.find({
         method: method.toUpperCase()
     }, excludeFields);
