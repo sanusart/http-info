@@ -48,17 +48,11 @@ var collection = {
 };
 
 // Routes
-//app.use(route.get('/', showInfo));
 app.use(route.get('/method/:method', getMethod));
 app.use(route.get('/status-code/:code', getStatusCode));
 app.use(route.get('/header/:header', getHeader));
 
 /////////////////
-
-// http://<domain>/
-function * showInfo() {
-    this.body = '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>http-info</title></head><body><h1>Welcome to "http-info"</h1><h2>Usage:</h2><p>Request methods info:<br><source>/method/:method</source> <br > e. g. <a href="/method/get">/method/get</a></p><p>Status codes info:<br><source>/status-code/:code</source> <br > e. g. <a href="/status-code/404">/status-code/404</a></p><p>Headers info:<br><source>/header/:header</source> <br> e.g. <a href="/header/content-type">/header/content-type</a></p><a href="https://github.com/sanusart/http-info"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a></body></html>';
-}
 
 // http://<domain>/method/:methodType
 function * getMethod(method) {
